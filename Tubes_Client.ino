@@ -7,7 +7,7 @@
 #include <FastLED.h>
 
 //led
-#define NUM_LEDS 59
+#define NUM_LEDS 60
 #define DATA_PIN 4
 CRGB leds[NUM_LEDS];
 
@@ -19,7 +19,7 @@ const char *password = "9876543210";
 struct settings {
   byte universe = 0;
   int address = 1;
-  byte ch_mode = 177;
+  byte ch_mode = 180;
 };
 
 //objects
@@ -35,7 +35,7 @@ void setup(void) {
   ConnectWifi();
   load_from_eeprom();
   init_http_server();
-  FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);
+  FastLED.addLeds<WS2812, DATA_PIN, GRB>(leds, NUM_LEDS);
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
 }

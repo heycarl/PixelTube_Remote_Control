@@ -31,7 +31,7 @@ void handleUniverse() {
 void handleAddress() {
   if (server.hasArg("value")) {
     if (check_value_range(1, server.arg(0).toInt())){
-      server.send(200, "text/plain", "ok, changed to: " + String(dmx_settings.address));
+      server.send(200, "text/plain", "ok, changed to: " + String(dmx_settings.address+1));
       store_to_eeprom();
     }
     else
@@ -41,7 +41,7 @@ void handleAddress() {
   }
   else
   {
-    server.send(200, "text/plain", "current value is: " + String(dmx_settings.address));
+    server.send(200, "text/plain", "current value is: " + String(dmx_settings.address+1));
   }
 }
 
