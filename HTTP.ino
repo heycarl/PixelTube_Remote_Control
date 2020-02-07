@@ -26,13 +26,38 @@ void handleUniverse() {
   {
     server.send(200, "text/plain", "current value is: " + String(dmx_settings.universe));
   }
-  
 }
 
 void handleAddress() {
-  server.send(200, "text/plain", "ok, changed to: ");
+  if (server.hasArg("value")) {
+    if (check_value_range(1, server.arg(0).toInt())){
+      server.send(200, "text/plain", "ok, changed to: " + String(dmx_settings.address));
+      store_to_eeprom();
+    }
+    else
+    {
+      server.send(404, "text/plain", "not in value range");
+    }
+  }
+  else
+  {
+    server.send(200, "text/plain", "current value is: " + String(dmx_settings.address));
+  }
 }
 
 void handleChMode() {
-  server.send(200, "text/plain", "ok, changed to: ");
+  if (server.hasArg("value")) {
+    if (check_value_range(2, server.arg(0).toInt())){
+      server.send(200, "text/plain", "ok, changed to: " + String(dmx_settings.ch_mode));
+      store_to_eeprom();
+    }
+    else
+    {
+      server.send(404, "text/plain", "not in value range");
+    }
+  }
+  else
+  {
+    server.send(200, "text/plain", "current value is: " + String(dmx_settings.ch_mode));
+  }
 }
