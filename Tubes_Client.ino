@@ -38,12 +38,19 @@ ESP8266WebServer server(80);
 
 void setup(void) {
   Serial.begin(115200);
+  // connect to wifi
   ConnectWifi();
+  // load data from eeprom
   load_from_eeprom();
+  // initialization of http server
   init_http_server();
+  // initialization of ws2812 strip
   pixel_init();
+  // RGB test for ws2812 strip
   pixel_initial_test();
+  // initialization and setup of OTA update server
   setup_ota();
+  // artnet callback setup
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
 }
