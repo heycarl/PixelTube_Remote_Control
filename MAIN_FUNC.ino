@@ -15,7 +15,7 @@ bool check_value_range(byte check_type, int value) {
       }
     case 1:
       if (value > 0 and value < 513) {
-        dmx_settings.address = value - 1;
+        dmx_settings.address = value;
         Serial.println("Address: " + String(dmx_settings.address));
         return true;
         break;
@@ -29,6 +29,18 @@ bool check_value_range(byte check_type, int value) {
       if (value == 3 or value == 180) {
         dmx_settings.ch_mode = value;
         Serial.println("Channel mode: " + String(dmx_settings.ch_mode));
+        return true;
+        break;
+      }
+      else
+      {
+        return false;
+        break;
+      }
+    case 3:
+      if (value > -1 and value < 255) {
+        dmx_settings.device_id = value;
+        Serial.println("Device id : " + String(value));
         return true;
         break;
       }
@@ -69,7 +81,7 @@ bool check_value_raw(byte check_type, int value) {
       }
     case 1:
       if (value > 0 and value < 513) {
-        Serial.println("Address from raw: " + String(value+1));
+        Serial.println("Address from raw: " + String(value + 1));
         return true;
         break;
       }
@@ -81,6 +93,17 @@ bool check_value_raw(byte check_type, int value) {
     case 2:
       if (value == 3 or value == 180) {
         Serial.println("Channel mode from raw: " + String(value));
+        return true;
+        break;
+      }
+      else
+      {
+        return false;
+        break;
+      }
+    case 3:
+      if (value > -1 and value < 255) {
+        Serial.println("Device id from raw: " + String(value));
         return true;
         break;
       }
