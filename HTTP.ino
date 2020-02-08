@@ -8,7 +8,11 @@ void init_http_server() {
 }
 
 void handleRoot() {
-  server.send(200, "text/plain", "by Gravity");
+  String text = "device created by Gravity team \n";
+  text += "Current device universe: " + String(dmx_settings.universe) + "\n";
+  text += "Current device address: " + String(dmx_settings.address+1) + "\n";
+  text += "Current device channel mode: " + String(dmx_settings.ch_mode) + "\n";
+  server.send(200, "text/plain", text);
 }
 
 void handleUniverse() {

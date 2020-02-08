@@ -35,7 +35,8 @@ void setup(void) {
   ConnectWifi();
   load_from_eeprom();
   init_http_server();
-  FastLED.addLeds<WS2812, DATA_PIN, GRB>(leds, NUM_LEDS);
+  pixel_init();
+  pixel_initial_test();
   artnet.setArtDmxCallback(onDmxFrame);
   artnet.begin();
 }
