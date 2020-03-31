@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>PixelTube</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark navigation-clean">
+        <div class="container"><a class="navbar-brand" href="index.html">PixelTube Controller</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html">General Settings</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="secondary.html">Secondary Settings</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="padding-top: 20px;">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="text-primary font-weight-bold m-0">DMX&nbsp;</h6>
+                    </div>
+                    <div class="card-body border rounded-0 border-primary">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span class="text-info">Address</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><input class="form-control-sm" type="number" id="address" min="1" max="512" value="123" style="font-size: 20px;"></div>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary" id="apply_address" type="button">Apply</button></div>
+                        </div>
+                    </div>
+                    <div class="card-body border rounded-0 border-primary">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span class="text-info">UNIVERSE</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><input class="form-control-sm" type="number" id="universe" min="0" max="16" value="1" style="font-size: 20px;"></div>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary" id="apply_universe" type="button">Apply</button></div>
+                        </div>
+                    </div>
+                    <div class="card-body border rounded-0 border-primary">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span class="text-info">CHannel MOde</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0">
+                                    <div class="btn-group btn-group-sm" role="group"><button class="btn btn-info" id="ch_mode_1" type="button">3ch</button><button class="btn btn-info" id="ch_mode_2" type="button">60ch</button><button class="btn btn-info" id="ch_mode_3" type="button">180ch</button></div>
+                                </div>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary" id="apply_ch_mode" type="button">Apply</button></div>
+                        </div>
+                    </div>
+                    <div class="card-body border rounded-0 border-primary">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span class="text-info">WORKIng mode</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0">
+                                    <div class="btn-group btn-group-sm" role="group"><button class="btn btn-info" id="working_mode_1" type="button">DMX</button><button class="btn btn-info" id="working_mode_1" type="button">Manual</button></div>
+                                </div>
+                            </div>
+                            <div class="col-auto"><button class="btn btn-primary" id="apply_working_mode" type="button">Apply</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="text-primary font-weight-bold m-0">Info</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span class="text-info">Firmware version</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span>v1.3.5</span></div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center no-gutters" style="padding-top: 10px;">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span class="text-info">Network settings</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span>Ip:&nbsp;<code style="color: rgb(0,123,255);font-size: 19px;">2.0.0.2</code></span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span>Mask:&nbsp;<code style="color: rgb(0,123,255);font-size: 19px;">255.255.255.0</code></span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0"><span>Geatway:&nbsp;<code style="color: rgb(0,123,255);font-size: 19px;">2.0.0.1</code></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

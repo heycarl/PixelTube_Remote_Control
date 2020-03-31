@@ -1,5 +1,5 @@
 void init_http_server() {
-  server.on("/", handleRoot);
+  server.on("/status", handleStatus);
   server.on("/universe", handleUniverse);
   server.on("/address", handleAddress);
   server.on("/ch_mode", handleChMode);
@@ -7,11 +7,12 @@ void init_http_server() {
   server.on("/working_mode", handleWorkingMode);
   server.on("/rgb", handleRGB);
   server.on("/restart", handleDeviceRestart);
+  server.on("/settings", handleSettings);
   server.begin();
   Serial.println("Init http server done");
 }
 
-void handleRoot() {
+void handleStatus() {
   String text = "device created by Gravity team \n";
   text += "Current device universe: " + String(dmx_settings.universe) + "\n";
   text += "Current device address: " + String(dmx_settings.address) + "\n";
@@ -130,4 +131,27 @@ void handleDeviceRestart() {
   server.send(200, "text/plain", "Restarting in 1 second");
   delay(1000);
   ESP.restart();
+}
+
+void handleSettings() {
+  StaticJsonDocument<309> doc;
+
+  doc["universe"] = dmx_settings.universe;
+  doc["address"] = dmx_settings.address;
+  doc["ch_mode"] = dmx_settings.ch_mode;
+  doc["working_mode"] = dmx_settings.working_mode;
+  doc["red"] = dmx_settings.r;
+  doc["green"] = dmx_settings.g;
+  doc["blue"] = dmx_settings.b;
+  doc["firmware"] = firmware_verion;
+  IPAddress ip = WiFi.localIP();
+  doc["ip"] =  String(ip[0]) + "." + String(ip[1]) + "." + String(ip[2]) + "." + String(ip[3]);
+  IPAddress subnet = WiFi.subnetMask();
+  doc["mask"] = String(subnet[0]) + "." + String(subnet[1]) + "." + String(subnet[2]) + "." + String(subnet[3]);
+  IPAddress gateway = WiFi.gatewayIP();
+  doc["geatway"] = String(gateway[0]) + "." + String(gateway[1]) + "." + String(gateway[2]) + "." + String(gateway[3]);
+
+  String out = "";
+  serializeJson(doc, out);
+  server.send(200, "text/plain", out);
 }

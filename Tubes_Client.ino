@@ -8,6 +8,8 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <ESP8266mDNS.h>
+#include <ArduinoJson.h>
+
 
 //led
 #define NUM_LEDS 60
@@ -18,7 +20,7 @@ CRGB leds[NUM_LEDS];
 const char *ssid = "Home";
 const char *password = "9876543210";
 
-#define firmware_verion = "v1.0.0";
+#define firmware_verion "v1.0.0";
 
 // vars
 struct settings {
