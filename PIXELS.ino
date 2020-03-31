@@ -23,3 +23,10 @@ void pixel_initial_test() {
   }
   FastLED.show();
 }
+
+void set_static_color(byte red, byte green, byte blue) {
+  for (byte led = 0; led < NUM_LEDS; led++) {
+    leds[led] = CRGB(red, green, blue);
+  }
+  FastLED.show();
+}

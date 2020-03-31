@@ -49,9 +49,44 @@ bool check_value_range(byte check_type, int value) {
         return false;
         break;
       }
+    case 4:
+      if (value == 0 or value == 1) {
+        dmx_settings.working_mode = value;
+        Serial.println("Working Mode : " + String(value));
+        return true;
+        break;
+      }
+      else
+      {
+        return false;
+        break;
+      }
     default:
       return false;
       break;
+  }
+}
+
+bool rgb_check(int red, int green, int blue) {
+  if (red > -1 and red < 256 and green > -1 and green < 256 and blue > -1 and blue < 256) {
+    dmx_settings.r = red;
+    dmx_settings.g = green;
+    dmx_settings.b = blue;
+    Serial.println("Static color changed to: " + String(red) + " " + String(green) + " " + String(blue));
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+String working_mode_to_string() {
+  if (dmx_settings.working_mode == 0) {
+    return "DMX mode";
+  }
+  else {
+    return "Manual color";
   }
 }
 
@@ -81,7 +116,7 @@ bool check_value_raw(byte check_type, int value) {
       }
     case 1:
       if (value > 0 and value < 513) {
-        Serial.println("Address from raw: " + String(value + 1));
+        Serial.println("Address from raw: " + String(value));
         return true;
         break;
       }

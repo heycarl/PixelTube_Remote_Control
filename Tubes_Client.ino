@@ -2,7 +2,7 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
-#include <ArtnetWifi.h>
+#include <ArtnetnodeWifi.h>
 #include <Arduino.h>
 #include <FastLED.h>
 #include <WiFiUdp.h>
@@ -18,12 +18,18 @@ CRGB leds[NUM_LEDS];
 const char *ssid = "Home";
 const char *password = "9876543210";
 
+#define firmware_verion = "v1.0.0";
+
 // vars
 struct settings {
   byte universe = 0;
   int address = 1;
   byte ch_mode = 180;
   byte device_id = 1;
+  bool working_mode = 0;
+  byte r = 0;
+  byte g = 0;
+  byte b = 0;
 };
 
 String hostname_str;
@@ -32,7 +38,7 @@ String hostname_str;
 settings dmx_settings;
 
 WiFiUDP UdpSend;
-ArtnetWifi artnet;
+ArtnetnodeWifi artnetnode;
 
 ESP8266WebServer server(80);
 
@@ -50,13 +56,18 @@ void setup(void) {
   pixel_initial_test();
   // initialization and setup of OTA update server
   setup_ota();
-  // artnet callback setup
-  artnet.setArtDmxCallback(onDmxFrame);
-  artnet.begin();
+  // artnet setup
+  setupARTNET();
 }
 
 void loop(void) {
   ArduinoOTA.handle();
   server.handleClient();
-  artnet.read();
+  if (!dmx_settings.working_mode) {
+    artnetnode.read();
+  }
+  else {
+    set_static_color(dmx_settings.r, dmx_settings.g, dmx_settings.b);
+  }
+
 }
