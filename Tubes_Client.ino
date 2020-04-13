@@ -9,6 +9,8 @@
 #include <ArduinoOTA.h>
 #include <ESP8266mDNS.h>
 #include <ArduinoJson.h>
+#include <ESP8266WebServer.h>
+#include <FS.h>   // Include the SPIFFS library
 
 
 //led
