@@ -3,6 +3,8 @@ boolean ConnectWifi(void)
   boolean state = true;
   int i = 0;
   WiFi.mode(WIFI_STA);
+  WiFi.hostname("pixel" + String(dmx_settings.device_id));
+  MDNS.begin("pixel" + String(dmx_settings.device_id));
   WiFi.begin(ssid, password);
   Serial.println("");
   Serial.println("Connecting to WiFi");

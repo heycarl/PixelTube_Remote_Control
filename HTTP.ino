@@ -1,4 +1,5 @@
 void init_http_server() {
+  server.on("/", handleIndex);
   server.on("/status", handleStatus);
   server.on("/universe", handleUniverse);
   server.on("/address", handleAddress);
@@ -37,6 +38,11 @@ bool handleFileRead(String path) { // send the right file to the client (if it e
   }
   Serial.println("\tFile Not Found");
   return false;                                         // If the file doesn't exist, return false
+}
+  
+void handleIndex() {
+  String text = "Gravity Production";
+  server.send(200, "text/plain", text);
 }
 
 void handleStatus() {

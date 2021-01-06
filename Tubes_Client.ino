@@ -22,7 +22,7 @@ CRGB leds[NUM_LEDS];
 const char *ssid = "Home";
 const char *password = "9876543210";
 
-#define firmware_verion "v1.0.0";
+#define firmware_verion "v1.0.1";
 
 // vars
 struct settings {
