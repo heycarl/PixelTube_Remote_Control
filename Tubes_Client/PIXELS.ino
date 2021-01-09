@@ -4,17 +4,17 @@ void pixel_init () {
 
 void pixel_initial_test() {
   for (int i = 0 ; i < NUM_LEDS ; i++) {
-    leds[i] = CRGB(127, 0, 0);
+    leds[i] = CRGB(255, 0, 0);
   }
   FastLED.show();
   delay(200);
   for (int i = 0 ; i < NUM_LEDS ; i++) {
-    leds[i] = CRGB(0, 127, 0);
+    leds[i] = CRGB(0, 255, 0);
   }
   FastLED.show();
   delay(200);
   for (int i = 0 ; i < NUM_LEDS ; i++) {
-    leds[i] = CRGB(0, 0, 127);
+    leds[i] = CRGB(0, 0, 255);
   }
   FastLED.show();
   delay(200);

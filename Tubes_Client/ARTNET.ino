@@ -1,6 +1,8 @@
 // used for each dmx packet
 void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data)
 {
+  noDMX_Mode = false;
+  lastDMX_Time = millis();
   if (universe == dmx_settings.universe) {
     if (dmx_settings.ch_mode == 3) {
       for (int led = 0; led < NUM_LEDS; led++) {

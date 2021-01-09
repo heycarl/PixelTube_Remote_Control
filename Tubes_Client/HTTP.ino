@@ -39,7 +39,7 @@ bool handleFileRead(String path) { // send the right file to the client (if it e
   Serial.println("\tFile Not Found");
   return false;                                         // If the file doesn't exist, return false
 }
-  
+
 void handleIndex() {
   String text = "Gravity Production";
   server.send(200, "text/plain", text);
@@ -50,7 +50,13 @@ void handleStatus() {
   text += "Current device universe: " + String(dmx_settings.universe) + "\n";
   text += "Current device address: " + String(dmx_settings.address) + "\n";
   text += "Current device channel mode: " + String(dmx_settings.ch_mode) + "\n";
-  text += "Current device working mode: " + working_mode_to_string() + "\n";
+  if (dmx_settings.working_mode == 0 && noDMX_Mode == true) {
+    text += "Current device working mode: standalone\n";
+  } else if (dmx_settings.working_mode == 0 && noDMX_Mode == false) {
+    text += "Current device working mode: DMX\n";
+  } else {
+    text += "Current device working mode: manual\n";
+    }
   text += "Static color RED: " + String(dmx_settings.r) + "\n";
   text += "Static color GREEN: " + String(dmx_settings.g) + "\n";
   text += "Static color BLUE: " + String(dmx_settings.b) + "\n";
@@ -169,6 +175,14 @@ void handleDeviceRestart() {
 void handleSettings() {
   StaticJsonDocument<309> doc;
 
+  doc["firmware"] = firmware_verion;
+  doc["radio_level"] =  WiFi.RSSI();
+  IPAddress ip = WiFi.localIP();
+  doc["ip"] =  String(ip[0]) + "." + String(ip[1]) + "." + String(ip[2]) + "." + String(ip[3]);
+  IPAddress subnet = WiFi.subnetMask();
+  doc["mask"] = String(subnet[0]) + "." + String(subnet[1]) + "." + String(subnet[2]) + "." + String(subnet[3]);
+  IPAddress gateway = WiFi.gatewayIP();
+  doc["geatway"] = String(gateway[0]) + "." + String(gateway[1]) + "." + String(gateway[2]) + "." + String(gateway[3]);
   doc["universe"] = dmx_settings.universe;
   doc["address"] = dmx_settings.address;
   doc["ch_mode"] = dmx_settings.ch_mode;
@@ -176,13 +190,6 @@ void handleSettings() {
   doc["red"] = dmx_settings.r;
   doc["green"] = dmx_settings.g;
   doc["blue"] = dmx_settings.b;
-  doc["firmware"] = firmware_verion;
-  IPAddress ip = WiFi.localIP();
-  doc["ip"] =  String(ip[0]) + "." + String(ip[1]) + "." + String(ip[2]) + "." + String(ip[3]);
-  IPAddress subnet = WiFi.subnetMask();
-  doc["mask"] = String(subnet[0]) + "." + String(subnet[1]) + "." + String(subnet[2]) + "." + String(subnet[3]);
-  IPAddress gateway = WiFi.gatewayIP();
-  doc["geatway"] = String(gateway[0]) + "." + String(gateway[1]) + "." + String(gateway[2]) + "." + String(gateway[3]);
 
   String out = "";
   serializeJson(doc, out);
