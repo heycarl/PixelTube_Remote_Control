@@ -81,14 +81,6 @@ bool rgb_check(int red, int green, int blue) {
   }
 }
 
-String working_mode_to_string() {
-  if (dmx_settings.working_mode == 0) {
-    return "DMX mode";
-  }
-  else {
-    return "Manual color";
-  }
-}
 
 bool address_check(int value) {
   if (value > 0 and value < 513) {

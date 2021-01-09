@@ -19,10 +19,10 @@
 CRGB leds[NUM_LEDS];
 
 // WiFi
-const char *ssid = "Home";
-const char *password = "9876543210";
+const char *ssid = "Gravity_PixelTubes";
+const char *password = "TubesShouldBeUpdated::";
 
-#define firmware_verion "v1.0.1";
+#define firmware_verion "v1.0.2";
 
 // vars
 struct settings {
@@ -37,6 +37,9 @@ struct settings {
 };
 
 String hostname_str;
+
+unsigned long lastDMX_Time = 0;
+bool noDMX_Mode = false;
 
 //objects
 settings dmx_settings;
@@ -62,16 +65,22 @@ void setup(void) {
   setup_ota();
   // artnet setup
   setupARTNET();
+  lastDMX_Time = millis();
 }
 
 void loop(void) {
   ArduinoOTA.handle();
   server.handleClient();
   if (!dmx_settings.working_mode) {
+    if (millis() - lastDMX_Time > 10000) {
+      if (noDMX_Mode == false) {
+        noDMX_Mode = true;
+        set_static_color(227, 32, 0);
+      }
+    }
     artnetnode.read();
   }
   else {
     set_static_color(dmx_settings.r, dmx_settings.g, dmx_settings.b);
   }
-
 }
